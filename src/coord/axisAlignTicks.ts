@@ -23,26 +23,32 @@ import IntervalScale from '../scale/Interval';
 import { getScaleExtent } from './axisHelper';
 import { AxisBaseModel } from './AxisBaseModel';
 import LogScale from '../scale/Log';
+import SymlogScale from '../scale/Symlog';
 import { warn } from '../util/log';
 import { increaseInterval, isValueNice } from '../scale/helper';
 
 const mathLog = Math.log;
 
-
 export function alignScaleTicks(
-    scale: IntervalScale | LogScale,
+    scale: IntervalScale | LogScale | SymlogScale,
     axisModel: AxisBaseModel<Pick<NumericAxisBaseOptionCommon, 'min' | 'max'>>,
-    alignToScale: IntervalScale | LogScale
+    alignToScale: IntervalScale | LogScale | SymlogScale
 ) {
 
     const intervalScaleProto = IntervalScale.prototype;
+    const symlogScaleProto = SymlogScale.prototype;
 
     // NOTE: There is a precondition for log scale  here:
     // In log scale we store _interval and _extent of exponent value.
     // So if we use the method of InternalScale to set/get these data.
     // It process the exponent value, which is linear and what we want here.
-    const alignToTicks = intervalScaleProto.getTicks.call(alignToScale);
-    const alignToNicedTicks = intervalScaleProto.getTicks.call(alignToScale, true);
+
+    const alignToTicks = scale.type === 'symlog'
+                         ? symlogScaleProto.getScaleTicks.call(alignToScale)
+                         : intervalScaleProto.getTicks.call(alignToScale);
+    const alignToNicedTicks = scale.type === 'symlog'
+                              ? symlogScaleProto.getScaleTicks.call(alignToScale, true)
+                              : intervalScaleProto.getTicks.call(alignToScale, true);
     const alignToSplitNumber = alignToTicks.length - 1;
     const alignToInterval = intervalScaleProto.getInterval.call(alignToScale);
 
@@ -54,6 +60,14 @@ export function alignScaleTicks(
     if (scale.type === 'log') {
         const logBase = mathLog((scale as LogScale).base);
         rawExtent = [mathLog(rawExtent[0]) / logBase, mathLog(rawExtent[1]) / logBase];
+    }
+    if (scale.type === 'symlog') {
+	// const model = axisModel as AxisBaseModel<SymlogAxisBaseOption>;
+	const ScaleSymlog = (scale as SymlogScale);
+	rawExtent = [
+            ScaleSymlog.convertScaleToValue(rawExtent[0]),
+            ScaleSymlog.convertScaleToValue(rawExtent[1]),
+	];
     }
 
     scale.setExtent(rawExtent[0], rawExtent[1]);

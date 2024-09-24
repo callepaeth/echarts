@@ -32,11 +32,13 @@ import TimeScale from '../scale/Time';
 import Model from '../model/Model';
 import { AxisBaseModel } from './AxisBaseModel';
 import LogScale from '../scale/Log';
+import SymlogScale from '../scale/Symlog';
 import Axis from './Axis';
 import {
     AxisBaseOption,
     CategoryAxisBaseOption,
     LogAxisBaseOption,
+    SymlogAxisBaseOption,
     TimeAxisLabelFormatterOption,
     ValueAxisBaseOption
 } from './axisCommonTypes';
@@ -204,6 +206,12 @@ export function createScaleByModel(model: AxisBaseModel, axisType?: string): Sca
                 return new TimeScale({
                     locale: model.ecModel.getLocaleModel(),
                     useUTC: model.ecModel.get('useUTC')
+                });
+            case 'symlog':
+                const myModel = model as AxisBaseModel<SymlogAxisBaseOption>;
+                return new SymlogScale({
+                    base: myModel.get('logBase'),
+                    C: myModel.get('logC') || Infinity
                 });
             default:
                 // case 'value'/'interval', 'log', or others.

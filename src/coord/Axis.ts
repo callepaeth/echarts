@@ -50,6 +50,7 @@ class Axis {
      *  - 'value'
      *  - 'time'
      *  - 'log'
+     *  - 'symlog'
      */
     type: OptionAxisType;
 

@@ -173,6 +173,9 @@ abstract class Scale<SETTING extends Dictionary<unknown> = Dictionary<unknown>> 
 
     abstract getTicks(): ScaleTick[];
 
+    // needed for 'log' and 'symlog'
+    abstract getScaleTicks(): ScaleTick[];
+
     abstract getMinorTicks(splitNumber: number): number[][];
 
     static registerClass: clazzUtil.ClassManager['registerClass'];

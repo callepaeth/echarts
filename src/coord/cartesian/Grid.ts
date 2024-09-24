@@ -53,6 +53,7 @@ import { isIntervalOrLogScale } from '../../scale/helper';
 import { alignScaleTicks } from '../axisAlignTicks';
 import IntervalScale from '../../scale/Interval';
 import LogScale from '../../scale/Log';
+import SymlogScale from '../../scale/Symlog';
 
 
 type Cartesian2DDimensionName = 'x' | 'y';
@@ -138,9 +139,9 @@ class Grid implements CoordinateSystemMaster {
 
                 each(axisNeedsAlign, axis => {
                     alignScaleTicks(
-                        axis.scale as IntervalScale | LogScale,
+                        axis.scale as IntervalScale | LogScale | SymlogScale,
                         axis.model,
-                        alignTo.scale as IntervalScale | LogScale
+                        alignTo.scale as IntervalScale | LogScale | SymlogScale
                     );
                 });
             }

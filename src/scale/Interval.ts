@@ -152,6 +152,10 @@ class IntervalScale<SETTING extends Dictionary<unknown> = Dictionary<unknown>> e
         return ticks;
     }
 
+    getScaleTicks(expandToNicedExtent?: boolean): ScaleTick[] {
+        return this.getTicks(expandToNicedExtent);
+    }
+
     getMinorTicks(splitNumber: number): number[][] {
         const ticks = this.getTicks(true);
         const minorTicks = [];

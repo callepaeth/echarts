@@ -20,6 +20,7 @@
 import {getPrecision, round, nice, quantityExponent} from '../util/number';
 import IntervalScale from './Interval';
 import LogScale from './Log';
+import SymlogScale from './Symlog';
 import Scale from './Scale';
 
 type intervalScaleNiceTicksResult = {
@@ -38,8 +39,8 @@ export function isValueNice(val: number) {
         || f === 5;
 }
 
-export function isIntervalOrLogScale(scale: Scale): scale is LogScale | IntervalScale {
-    return scale.type === 'interval' || scale.type === 'log';
+export function isIntervalOrLogScale(scale: Scale): scale is LogScale | IntervalScale | SymlogScale {
+    return scale.type === 'interval' || scale.type === 'log' || scale.type === 'symlog';
 }
 /**
  * @param extent Both extent[0] and extent[1] should be valid number.

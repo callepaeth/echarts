@@ -92,7 +92,7 @@ class Polar implements CoordinateSystem, CoordinateSystemMaster {
     /**
      * Get axes by type of scale
      */
-    getAxesByScale(scaleType: 'ordinal' | 'interval' | 'time' | 'log') {
+    getAxesByScale(scaleType: 'ordinal' | 'interval' | 'time' | 'log' | 'symlog') {
         const axes = [];
         const angleAxis = this._angleAxis;
         const radiusAxis = this._radiusAxis;

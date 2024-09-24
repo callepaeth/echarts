@@ -799,6 +799,10 @@ class SeriesData<
         return this._store.getSum(this._getStoreDimIndex(dim));
     }
 
+    getMaxPrecision(dim: DimensionLoose): number {
+        return this._store.getMaxPrecision(this._getStoreDimIndex(dim));
+    }
+
     getMedian(dim: DimensionLoose): number {
         return this._store.getMedian(this._getStoreDimIndex(dim));
     }

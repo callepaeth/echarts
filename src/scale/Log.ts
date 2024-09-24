@@ -55,7 +55,6 @@ class LogScale extends Scale {
     // FIXME:TS actually used by `IntervalScale`
     private _niceExtent: [number, number];
 
-
     /**
      * @param Whether expand the ticks to niced extent.
      */
@@ -193,6 +192,7 @@ class LogScale extends Scale {
 
     getMinorTicks: IntervalScale['getMinorTicks'];
     getLabel: IntervalScale['getLabel'];
+    getScaleTicks: IntervalScale['getScaleTicks'];
 }
 
 const proto = LogScale.prototype;

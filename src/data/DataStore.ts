@@ -29,6 +29,7 @@ import { DataProvider } from './helper/dataProvider';
 import { parseDataValue } from './helper/dataValueHelper';
 import OrdinalMeta from './OrdinalMeta';
 import { shouldRetrieveDataByName, Source } from './Source';
+import * as numberUtil from '../util/number';
 
 const UNDEFINED = 'undefined';
 /* global Float64Array, Int32Array, Uint32Array, Uint16Array */
@@ -498,6 +499,26 @@ class DataStore {
             }
         }
         return sum;
+    }
+
+    /**
+     * Get biggest precision of data in one dimension
+     */
+    getMaxPrecision(dim: DimensionIndex): number {
+        const dimData = this._chunks[dim];
+        let precision = 0;
+        if (dimData) {
+            for (let i = 0, len = this.count(); i < len; i++) {
+                const value = this.get(dim, i) as number;
+                if (!isNaN(value)) {
+                    const valuePrecision = numberUtil.getPrecision(value);
+                    if (valuePrecision > precision) {
+                        precision = valuePrecision;
+                    }
+                }
+            }
+        }
+        return precision;
     }
 
     /**

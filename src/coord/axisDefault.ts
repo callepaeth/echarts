@@ -193,10 +193,15 @@ const logAxis: AxisBaseOption = zrUtil.defaults({
     logBase: 10
 }, valueAxis);
 
+const symlogAxis: AxisBaseOption = zrUtil.defaults({
+    logBase: 2,
+    logC: 0.01
+}, valueAxis);
 
 export default {
     category: categoryAxis,
     value: valueAxis,
     time: timeAxis,
-    log: logAxis
+    log: logAxis,
+    symlog: symlogAxis
 };
