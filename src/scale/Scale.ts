@@ -260,6 +260,9 @@ abstract class Scale<SETTING extends ScaleSettingDefault = ScaleSettingDefault> 
 
     abstract getTicks(opt?: ScaleGetTicksOpt): ScaleTick[];
 
+    // needed for 'log' and 'symlog'
+    abstract getScaleTicks(opt?: ScaleGetTicksOpt): ScaleTick[];
+
     abstract getMinorTicks(splitNumber: number): number[][];
 
     static registerClass: clazzUtil.ClassManager['registerClass'];

@@ -189,6 +189,11 @@ class IntervalScale<SETTING extends ScaleSettingDefault = ScaleSettingDefault> e
         return ticks;
     }
 
+    getScaleTicks(opt?: ScaleGetTicksOpt): ScaleTick[] {
+        opt = opt || {};
+        return this.getTicks({expandToNicedExtent: opt.expandToNicedExtent});
+    }
+
     getMinorTicks(splitNumber: number): number[][] {
         const ticks = this.getTicks({
             expandToNicedExtent: true,

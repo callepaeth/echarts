@@ -70,6 +70,7 @@ import { error, log } from '../../util/log';
 import { AxisTickLabelComputingKind } from '../axisTickLabelBuilder';
 import { injectCoordSysByOption } from '../../core/CoordinateSystem';
 import { mathMax, parsePositionSizeOption } from '../../util/number';
+import SymlogScale from '../../scale/Symlog';
 
 type Cartesian2DDimensionName = 'x' | 'y';
 
@@ -162,9 +163,9 @@ class Grid implements CoordinateSystemMaster {
 
                 each(axisNeedsAlign, axis => {
                     alignScaleTicks(
-                        axis.scale as IntervalScale | LogScale,
+                        axis.scale as IntervalScale | LogScale | SymlogScale,
                         axis.model,
-                        alignTo.scale as IntervalScale | LogScale
+                        alignTo.scale as IntervalScale | LogScale | SymlogScale
                     );
                 });
             }

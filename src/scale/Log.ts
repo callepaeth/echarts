@@ -212,7 +212,6 @@ class LogScale extends IntervalScale {
         this._originalScale._innerSetBreak(parsedOriginal);
         this._innerSetBreak(parsedLogged);
     }
-
 }
 
 function fixRoundingError(val: number, originalVal: number): number {

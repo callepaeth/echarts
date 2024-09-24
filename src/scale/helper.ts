@@ -23,6 +23,7 @@ import LogScale from './Log';
 import type Scale from './Scale';
 import { bind } from 'zrender/src/core/util';
 import type { ScaleBreakContext } from './break';
+import SymlogScale from './Symlog';
 
 type intervalScaleNiceTicksResult = {
     interval: number,
@@ -40,8 +41,8 @@ export function isValueNice(val: number) {
         || f === 5;
 }
 
-export function isIntervalOrLogScale(scale: Scale): scale is LogScale | IntervalScale {
-    return scale.type === 'interval' || scale.type === 'log';
+export function isIntervalOrLogScale(scale: Scale): scale is LogScale | IntervalScale | SymlogScale {
+    return scale.type === 'interval' || scale.type === 'log' || scale.type === 'symlog';
 }
 /**
  * @param extent Both extent[0] and extent[1] should be valid number.

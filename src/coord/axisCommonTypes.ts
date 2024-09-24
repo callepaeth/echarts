@@ -31,7 +31,7 @@ import {
 import type { PrimaryTimeUnit } from '../util/time';
 
 
-export const AXIS_TYPES = {value: 1, category: 1, time: 1, log: 1} as const;
+export const AXIS_TYPES = {value: 1, category: 1, time: 1, log: 1, symlog: 1} as const;
 export type OptionAxisType = keyof typeof AXIS_TYPES;
 
 export interface AxisBaseOptionCommon extends ComponentOption,
@@ -206,6 +206,12 @@ export interface LogAxisBaseOption extends NumericAxisBaseOptionCommon {
     axisLabel?: AxisLabelOption<'log'>;
     logBase?: number;
 }
+export interface SymlogAxisBaseOption extends NumericAxisBaseOptionCommon {
+    type?: 'symlog';
+    axisLabel?: AxisLabelOption<'symlog'>;
+    logBase?: number;
+    logC?: number;
+}
 export interface TimeAxisBaseOption extends NumericAxisBaseOptionCommon {
     type?: 'time';
     axisLabel?: AxisLabelOption<'time'>;
@@ -289,6 +295,7 @@ type LabelFormatters = {
     log: AxisLabelValueFormatter | string
     category: AxisLabelCategoryFormatter | string
     time: TimeAxisLabelFormatterOption
+    symlog: AxisLabelValueFormatter | string
 };
 
 export type AxisLabelBaseOptionNuance = {
@@ -360,4 +367,4 @@ interface SplitAreaOption {
 }
 
 export type AxisBaseOption = ValueAxisBaseOption | LogAxisBaseOption
-    | CategoryAxisBaseOption | TimeAxisBaseOption;
+    | CategoryAxisBaseOption | TimeAxisBaseOption | SymlogAxisBaseOption;

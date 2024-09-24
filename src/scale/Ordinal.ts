@@ -177,6 +177,10 @@ class OrdinalScale extends Scale<OrdinalScaleSetting> {
         return ticks;
     }
 
+    getScaleTicks(): ScaleTick[] {
+        return this.getTicks();
+    }
+
     getMinorTicks(splitNumber: number): number[][] {
         // Not support.
         return;

@@ -54,7 +54,7 @@ export interface RadarIndicatorOption {
     max?: number
     color?: ColorString
 
-    axisType?: 'value' | 'log'
+    axisType?: 'value' | 'log' | 'symlog'
 }
 
 export interface RadarOption extends
@@ -70,7 +70,7 @@ export interface RadarOption extends
     shape?: 'polygon' | 'circle'
 
     // TODO. axisType seems to have issue.
-    // axisType?: 'value' | 'log'
+    // axisType?: 'value' | 'log' | 'symlog'
 
     axisLine?: AxisBaseOption['axisLine']
     axisTick?: AxisBaseOption['axisTick']
@@ -98,7 +98,7 @@ export interface RadarOption extends
 
 export type InnerIndicatorAxisOption = AxisBaseOption & {
     // TODO Use type?
-    // axisType?: 'value' | 'log'
+    // axisType?: 'value' | 'log' | 'symlog'
     showName?: boolean
 };
 
